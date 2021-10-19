@@ -1,14 +1,9 @@
 package com.uea.mypay.agenda
 
 data class Contato(var nome: String, var telefone: String) {
-    val id = getProximoId()
 
-    companion object {
-        var lastId = -1
-
-        fun getProximoId(): Int {
-            return lastId++
-        }
+    override fun toString():String{
+        return "$nome ($telefone)"
     }
 }
 
