@@ -20,16 +20,31 @@ class TelaInicialActivity : AppCompatActivity() {
 
         binding = ActivityTelaInicialBinding.inflate(layoutInflater)
 
-
-
-
-
-
-
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentContainer, ListaContatosFragment())
             .commit()
+
+        binding.bottomNavigationView4.setOnNavigationItemReselectedListener {
+            when(it.itemId) {
+                R.id.ic_home -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, ListaContatosFragment())
+                        .commit()
+                    true
+                }
+                R.id.ic_ajustes -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, AjustesFragment())
+                        .commit()
+                    true
+                }
+                else ->
+                    false
+            }
+        }
 
         setContentView(binding.root)
     }
