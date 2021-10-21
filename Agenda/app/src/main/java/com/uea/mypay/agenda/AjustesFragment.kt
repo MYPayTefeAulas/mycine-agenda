@@ -18,6 +18,7 @@ class AjustesFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAjustesBinding.inflate(inflater,container,false)
+
         return  binding.root
     }
 }
