@@ -9,10 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Agenda">
-        <activity
-            android:name=".EditarContatoActivity"
-            android:exported="true" />
-        <activity
+         <activity
             android:name=".TelaInicialActivity"
             android:exported="true" >
 

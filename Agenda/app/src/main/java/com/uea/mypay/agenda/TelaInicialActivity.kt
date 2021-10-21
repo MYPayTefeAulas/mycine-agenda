@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.uea.mypay.agenda.databinding.ActivityTelaInicialBinding
 
 class TelaInicialActivity : AppCompatActivity() {
@@ -18,28 +20,39 @@ class TelaInicialActivity : AppCompatActivity() {
 
         binding = ActivityTelaInicialBinding.inflate(layoutInflater)
 
-        Agenda.listaContatos.add(Contato("Carlos", "11111"))
-        Agenda.listaContatos.add(Contato("Milena", "22222"))
-        Agenda.listaContatos.add(Contato("Robert", "33333"))
-        Agenda.listaContatos.add(Contato("Roney" , "44444"))
-        Agenda.listaContatos.add(Contato("Varley", "55555"))
+        incializaLista()
 
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, Agenda.listaContatos)
-        binding.lvContatos.adapter = adapter
-        binding.lvContatos.setOnItemClickListener { parent, view, position, id ->
-//            val contato = adapter.getItem(position) // obtém o contato se quiser fazer algo com ele
-//            Toast.makeText(this, "${contato!!.nome}", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, EditarContatoActivity::class.java)
-            intent.putExtra("indiceContato", position)
-            startActivity(intent)
-        }
+
+        binding.rvContatos.layoutManager = LinearLayoutManager(this)
+        binding.rvContatos.adapter = ContatoAdapter(Agenda.listaContatos)
+        binding.rvContatos.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
         setContentView(binding.root)
     }
 
-    override fun onResume() {
-        super.onResume()
-        adapter.notifyDataSetChanged()
+    private fun incializaLista() {
+        Agenda.listaContatos.addAll(
+            listOf(
+                Contato("1 Carlos", "11111"),
+                Contato("2 Milena", "22222"),
+                Contato("3 Robert", "33333"),
+                Contato("4 Roney" , "44444"),
+                Contato("5 Varley", "55555"),
+                Contato("6 Maria",  "33333"),
+                Contato("7 Maria",  "33333"),
+                Contato("8 Maria",  "33333"),
+                Contato("9 Maria",  "33333"),
+                Contato("10 Maria", "33333"),
+                Contato("11 Maria", "33333"),
+                Contato("12 Maria", "33333"),
+                Contato("13 Maria", "33333"),
+                Contato("14 Maria", "33333"),
+                Contato("15 Maria", "33333"),
+                Contato("16 Maria", "33333"),
+                Contato("17 Maria", "33333"),
+                Contato("18 Maria", "33333")
+            )
+        )
     }
 
 }
