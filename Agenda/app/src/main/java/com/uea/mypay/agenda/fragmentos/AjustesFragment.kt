@@ -1,4 +1,4 @@
-package com.uea.mypay.agenda
+package com.uea.mypay.agenda.fragmentos
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ class AjustesFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAjustesBinding.inflate(inflater,container,false)
 
         return  binding.root

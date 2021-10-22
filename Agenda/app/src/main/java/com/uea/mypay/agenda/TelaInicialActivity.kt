@@ -1,15 +1,11 @@
 package com.uea.mypay.agenda
 
-import android.content.Intent
-import android.graphics.Color
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.uea.mypay.agenda.databinding.ActivityTelaInicialBinding
+import com.uea.mypay.agenda.fragmentos.AjustesFragment
 
 class TelaInicialActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTelaInicialBinding

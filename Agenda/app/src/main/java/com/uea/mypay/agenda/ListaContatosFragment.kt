@@ -1,5 +1,6 @@
 package com.uea.mypay.agenda
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,28 +11,41 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uea.mypay.agenda.databinding.FragmentListaContatosBinding
 
 class ListaContatosFragment: Fragment() {
-
     private var _binding: FragmentListaContatosBinding? = null
-    private  val binding get() = _binding!!
 
-    private lateinit var adapter: ContatoAdapter
+    private val binding get() = _binding!!
+
+    private lateinit var adapter: ContatosAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListaContatosBinding.inflate(inflater, container, false)
 
+        adapter = ContatosAdapter(mutableListOf(), ::onBtEditarClick)
+
         binding.rvContatos.layoutManager = LinearLayoutManager(context)
-        binding.rvContatos.adapter = ContatoAdapter(Agenda.listaContatos)
+        binding.rvContatos.adapter = adapter
         binding.rvContatos.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
 
-        incializaLista()
+        inicializaLista()
+        adapter.swapData(Agenda.listaContatos)
 
         return binding.root
     }
-    private fun incializaLista() {
+
+    override fun onResume() {
+        super.onResume()
+        adapter.swapData(Agenda.listaContatos)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+    private fun inicializaLista() {
         Agenda.listaContatos.addAll(
             listOf(
                 Contato("1 Carlos", "11111"),
@@ -55,5 +69,9 @@ class ListaContatosFragment: Fragment() {
             )
         )
     }
-
+    fun onBtEditarClick(indiceLista: Int) {
+        val intent = Intent(context, EditarContatoActivity::class.java)
+        intent.putExtra("indiceContato", indiceLista)
+        startActivity(intent)
+    }
 }
