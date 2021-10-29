@@ -29,10 +29,6 @@ class ContatosAdapter(
         holder.binding.txtNome.text = listaContatos[position].nome
         holder.binding.txtTelefone.text = listaContatos[position].telefone
 
-//        holder.binding.root.setOnClickListener {
-//            onItemClick(position)
-//        }
-
         holder.binding.btEditarContato.setOnClickListener {
             onBtEditarClick(position)
         }

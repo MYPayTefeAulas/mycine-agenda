@@ -19,6 +19,16 @@ class AjustesFragment: Fragment() {
     ): View {
         _binding = FragmentAjustesBinding.inflate(inflater,container,false)
 
+        val config = requireActivity().getSharedPreferences("configuracoes", 0)
+
+        binding.switch1.isChecked = config.getBoolean("listaContatosAlfabetico", false)
+
+        binding.switch1.setOnCheckedChangeListener { compoundButton, b ->
+            val editor = config.edit()
+            editor.putBoolean("listaContatosAlfabetico", compoundButton.isChecked)
+            editor.apply()
+        }
+
         return  binding.root
     }
 }

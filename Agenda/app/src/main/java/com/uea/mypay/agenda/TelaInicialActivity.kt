@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.uea.mypay.agenda.databinding.ActivityTelaInicialBinding
 import com.uea.mypay.agenda.fragmentos.AjustesFragment
+import com.uea.mypay.agenda.fragmentos.ListaContatosFragment
 
 class TelaInicialActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTelaInicialBinding
