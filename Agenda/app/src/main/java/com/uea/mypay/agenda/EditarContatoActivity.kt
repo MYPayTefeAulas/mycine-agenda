@@ -21,6 +21,7 @@ class EditarContatoActivity : AppCompatActivity() {
         val telefone: String = Agenda.listaContatos[indiceContato].telefone
         binding.agendaTxtTelefone.setText(telefone)
         binding.agendaTxtNome.setText(nome)
+        binding.switchaContatoFavorito.isChecked = Agenda.listaContatos[indiceContato].favorito
 
         binding.agendaBtSalvar.setOnClickListener {
             Agenda.listaContatos[indiceContato].nome = binding.agendaTxtNome.text.toString()
@@ -40,6 +41,10 @@ class EditarContatoActivity : AppCompatActivity() {
                     finish()
                 }
                 dialog.show()
+        }
+
+        binding.switchaContatoFavorito.setOnCheckedChangeListener { _, ischecked ->
+            Agenda.listaContatos[indiceContato].favorito = ischecked
         }
 
         setContentView(binding.root)

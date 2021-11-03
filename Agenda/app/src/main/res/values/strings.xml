@@ -17,5 +17,9 @@
     <string name="icone_lupa">Ícone da lupa para pesquisa em listas</string>
     <string name="home">Home</string>
     <string name="ajustes">Ajustes</string>
-
+    <string name="favorito">Favorito</string>
+    <string name="ordenacao_a_z">Ordenação A - Z</string>
+    <string name="ordenacao_z_a">Ordenação Z -A</string>
+    <string name="ordenacao_insercao">Ordenação Inserção</string>
+    <string name="ordenacao_contatos">Ordenação dos Contatos</string>
 </resources>
