@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Agenda</string>
+    <string name="nome">Nome</string>
+    <string name="tefone">Tefone</string>
+    <string name="salvar">Salvar</string>
+    <string name="deletar">Deletar</string>
+    <string name="ordem_alfabetica">Ordem Alfabetica</string>
+    <string name="editar">Editar</string>
+    <string name="deletar_contato">Deletar Contato</string>
+    <string name="realmente_contato">Você realmente deseja deletar este contato?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="contato_removido">Contato removido</string>
+    <string name="contato_salvo_sucesso">Contato Salvo com Sucesso!</string>
+    <string name="editar_contato">Editar Contato</string>
+    <string name="digite_pesquisar">Digite para pesquisar</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="icone_lupa">Ícone da lupa para pesquisa em listas</string>
+    <string name="home">Home</string>
+    <string name="ajustes">Ajustes</string>
+
 </resources>

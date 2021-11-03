@@ -48,7 +48,7 @@ class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
             when (menuItem.itemId) {
                 R.id.toolbarContatosBusca -> {
                     val searchView = menuItem?.actionView as SearchView
-                    searchView.queryHint = "Digite para pesquisar"
+                    searchView.queryHint = getString(R.string.digite_pesquisar)
                     searchView.setOnQueryTextListener(this)
                     true
                 }

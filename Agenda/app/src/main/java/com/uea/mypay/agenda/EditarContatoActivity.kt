@@ -3,6 +3,7 @@ package com.uea.mypay.agenda
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.uea.mypay.agenda.databinding.ActivityEditarContatoBinding
 
 class EditarContatoActivity : AppCompatActivity() {
@@ -12,7 +13,7 @@ class EditarContatoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditarContatoBinding.inflate(layoutInflater)
 
-        setTitle("Editar Contato")
+        setTitle(getString(R.string.editar_contato))
 
         val indiceContato = intent.getIntExtra("indiceContato", -1)
 
@@ -24,8 +25,21 @@ class EditarContatoActivity : AppCompatActivity() {
         binding.agendaBtSalvar.setOnClickListener {
             Agenda.listaContatos[indiceContato].nome = binding.agendaTxtNome.text.toString()
             Agenda.listaContatos[indiceContato].telefone = binding.agendaTxtTelefone.text.toString()
-            Toast.makeText(this, "Contato Salvo com Sucesso!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.contato_salvo_sucesso), Toast.LENGTH_SHORT).show()
             finish()
+        }
+
+        binding.btDeletar.setOnClickListener {
+            val dialog = MaterialAlertDialogBuilder(this)
+            dialog.setTitle(getString(R.string.deletar_contato))
+            dialog.setMessage(getString(R.string.realmente_contato))
+            dialog.setNegativeButton(getString(R.string.cancelar),null)
+            dialog.setPositiveButton(getString(R.string.deletar)){ _, _ ->
+                    Agenda.listaContatos.removeAt(indiceContato)
+                    Toast.makeText(this, getString(R.string.contato_removido), Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                dialog.show()
         }
 
         setContentView(binding.root)
