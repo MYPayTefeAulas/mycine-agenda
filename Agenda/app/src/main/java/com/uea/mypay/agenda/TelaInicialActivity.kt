@@ -7,7 +7,14 @@ import androidx.fragment.app.Fragment
 import com.uea.mypay.agenda.databinding.ActivityTelaInicialBinding
 import com.uea.mypay.agenda.fragmentos.AjustesFragment
 import com.uea.mypay.agenda.fragmentos.ListaContatosFragment
-
+/**
+ * Classe TelaInicialActivity para conter todos os fragments principais: lista de contatos e ajustes
+ *
+ * Bottom Navigation permite escolher qual tela ver
+ *
+ * @author Robert Luis Lara Ribeiro
+ *<a href="mailto:robertlarabr@gmail.com">robertlarabr@gmail.com</a>
+ */
 class TelaInicialActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTelaInicialBinding
 

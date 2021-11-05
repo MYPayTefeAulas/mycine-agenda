@@ -12,7 +12,17 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uea.mypay.agenda.*
 import com.uea.mypay.agenda.databinding.FragmentListaContatosBinding
-
+import com.uea.mypay.agenda.enums.TipoOrdenacao
+import com.uea.mypay.agenda.utils.IntentsConstants
+import com.uea.mypay.agenda.utils.PrefsConstants
+/**
+ * Classe ListaContatosFragment para listar todos os contatos da agenda
+ *
+ * Botão EDITAR permite edição e ActionBar contém botão de busca
+ *
+ * @author Robert Luis Lara Ribeiro
+ *<a href="mailto:robertlarabr@gmail.com">robertlarabr@gmail.com</a>
+ */
 class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
     private var _binding: FragmentListaContatosBinding? = null
 
@@ -46,18 +56,20 @@ class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun carregaLista() {
-        val config = requireActivity().getSharedPreferences("configuracoes", 0)
-        val radioOrdenacaoSelecionada_id = config.getInt("ordenacaoContatos", R.id.radioOrdenacaoInsercao)
-        when (radioOrdenacaoSelecionada_id) {
-            R.id.radioOrdenacaoAZ -> {
+        val config = requireActivity().getSharedPreferences(PrefsConstants.FILE_CONFIGURACOES, 0)
+        val tipoOrdenacao_str = config.getString(PrefsConstants.KEY_TIPO_ORDENACAO_CONTATOS, TipoOrdenacao.ORDEM_INSERCAO.toString())
+       val tipoOrdenacao: TipoOrdenacao = TipoOrdenacao.valueOf(tipoOrdenacao_str!!)
+
+        when (tipoOrdenacao) {
+            TipoOrdenacao.ALFABETICA_AZ -> {
                 val listaOrdenada = Agenda.listaContatos.sortedBy { it.nome }
                 adapter.swapData(listaOrdenada)
             }
-            R.id.radioOrdenacaoZA -> {
+            TipoOrdenacao.ALFABETICA_ZA -> {
                 val listaOrdenada = Agenda.listaContatos.sortedByDescending {it.nome }
                 adapter.swapData(listaOrdenada)
             }
-            else -> {
+            TipoOrdenacao.ORDEM_INSERCAO -> {
                 adapter.swapData(Agenda.listaContatos)
             }
         }
@@ -106,7 +118,7 @@ class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
 
     fun onBtEditarClick(indiceLista: Int) {
         val intent = Intent(context, EditarContatoActivity::class.java)
-        intent.putExtra("indiceContato", indiceLista)
+        intent.putExtra(IntentsConstants.INT_INDICE_CONTATO, indiceLista)
         startActivity(intent)
     }
 }

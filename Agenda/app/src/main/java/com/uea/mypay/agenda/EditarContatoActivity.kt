@@ -5,7 +5,16 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.uea.mypay.agenda.databinding.ActivityEditarContatoBinding
-
+import com.uea.mypay.agenda.utils.IntentsConstants
+/**
+ * Classe EditarContatoActivity tela que abre ao apertar em EditarContatos, é chamada
+ * a partir do Fragment ListaContatos
+ *
+ * Possui botão de salvar, deletar e marcar contato como favorito
+ *
+ * @author Robert Luis Lara Ribeiro
+ *<a href="mailto:robertlarabr@gmail.com">robertlarabr@gmail.com</a>
+ */
 class EditarContatoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditarContatoBinding
 
@@ -15,7 +24,7 @@ class EditarContatoActivity : AppCompatActivity() {
 
         setTitle(getString(R.string.editar_contato))
 
-        val indiceContato = intent.getIntExtra("indiceContato", -1)
+        val indiceContato = intent.getIntExtra(IntentsConstants.INT_INDICE_CONTATO, -1)
 
         val nome: String = Agenda.listaContatos[indiceContato].nome
         val telefone: String = Agenda.listaContatos[indiceContato].telefone

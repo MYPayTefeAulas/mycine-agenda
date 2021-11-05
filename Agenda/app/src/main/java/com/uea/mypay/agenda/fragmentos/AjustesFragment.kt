@@ -8,7 +8,16 @@ import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.uea.mypay.agenda.R
 import com.uea.mypay.agenda.databinding.FragmentAjustesBinding
-
+import com.uea.mypay.agenda.enums.TipoOrdenacao
+import com.uea.mypay.agenda.utils.PrefsConstants
+/**
+ * Classe AjustesFragment para ajustar as configurações do app
+ *
+ * Opções implementadas: tipo de ordenação da lista de contatos
+ *
+ * @author Robert Luis Lara Ribeiro
+ *<a href="mailto:robertlarabr@gmail.com">robertlarabr@gmail.com</a>
+ */
 class AjustesFragment: Fragment() {
     private var _binding: FragmentAjustesBinding? = null
 
@@ -20,25 +29,33 @@ class AjustesFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAjustesBinding.inflate(inflater,container,false)
+        val view = binding.root
 
-        val config = requireActivity().getSharedPreferences("configuracoes",0)
+        val config = requireActivity().getSharedPreferences(PrefsConstants.FILE_CONFIGURACOES,0)
+
+        val tipoOrdenacao_str = config.getString(
+            PrefsConstants.KEY_TIPO_ORDENACAO_CONTATOS,
+            TipoOrdenacao.ALFABETICA_AZ.toString()
+        )
+        val tipoOrdenacao: TipoOrdenacao = TipoOrdenacao.valueOf(tipoOrdenacao_str!!)
+
+        when (tipoOrdenacao){
+            TipoOrdenacao.ALFABETICA_AZ -> binding.radioOrdenacaoAZ.isChecked = true
+            TipoOrdenacao.ALFABETICA_ZA -> binding.radioOrdenacaoZA.isChecked = true
+            TipoOrdenacao.ORDEM_INSERCAO -> binding.radioOrdenacaoInsercao.isChecked = true
+        }
 
         binding.radioGroupOrdenacao.setOnCheckedChangeListener { _, checkedId ->
-            val editor = config.edit()
-            editor.putInt("ordenacaoContatos",checkedId)
+            val novoTipoOrdenacao = when(checkedId) {
+                binding.radioOrdenacaoAZ.id ->  TipoOrdenacao.ALFABETICA_AZ.toString()
+                binding.radioOrdenacaoZA.id ->  TipoOrdenacao.ALFABETICA_ZA.toString()
+                binding.radioOrdenacaoInsercao.id ->  TipoOrdenacao.ORDEM_INSERCAO.toString()
+                else -> TipoOrdenacao.ORDEM_INSERCAO.toString()
+            }
+            val editor =config.edit()
+            editor.putString(PrefsConstants.KEY_TIPO_ORDENACAO_CONTATOS,novoTipoOrdenacao)
             editor.apply()
         }
-        return  binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val config = requireActivity().getSharedPreferences("configuracoes", 0)
-
-        val radioOrdenacaoSelecionada_id = config.getInt("ordenacaoContatos", R.id.radioOrdenacaoInsercao)
-        val radioOrdenacaoSelecionada_view = requireView().findViewById<RadioButton>(radioOrdenacaoSelecionada_id)
-
-        radioOrdenacaoSelecionada_view.isChecked = true
+        return  view
     }
 }
