@@ -1,12 +1,14 @@
-package com.uea.mypay.agenda
+package com.uea.mypay.agenda.ui
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.uea.mypay.agenda.model.Contato
+import com.uea.mypay.agenda.R
 import com.uea.mypay.agenda.databinding.ActivityTelaInicialBinding
-import com.uea.mypay.agenda.fragmentos.AjustesFragment
-import com.uea.mypay.agenda.fragmentos.ListaContatosFragment
+import com.uea.mypay.agenda.ui.fragmentos.AjustesFragment
+import com.uea.mypay.agenda.ui.fragmentos.ListaContatosFragment
 /**
  * Classe TelaInicialActivity para conter todos os fragments principais: lista de contatos e ajustes
  *

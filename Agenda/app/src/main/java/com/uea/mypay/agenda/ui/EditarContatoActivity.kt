@@ -1,9 +1,10 @@
-package com.uea.mypay.agenda
+package com.uea.mypay.agenda.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.uea.mypay.agenda.R
 import com.uea.mypay.agenda.databinding.ActivityEditarContatoBinding
 import com.uea.mypay.agenda.utils.IntentsConstants
 /**

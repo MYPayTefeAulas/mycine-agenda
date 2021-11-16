@@ -1,4 +1,4 @@
-package com.uea.mypay.agenda
+package com.uea.mypay.agenda.model
 /**
  * Classe Contato para armazenar informações de contatos, é a parte do conjunto "lista de contatos"
  *

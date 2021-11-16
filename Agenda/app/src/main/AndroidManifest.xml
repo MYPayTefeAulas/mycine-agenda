@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Agenda">
         <activity
-            android:name=".EditarContatoActivity"
+            android:name=".ui.EditarContatoActivity"
             android:exported="true" />
         <activity
-            android:name=".TelaInicialActivity"
+            android:name=".ui.TelaInicialActivity"
             android:exported="true"
             android:theme="@style/NoActionBar">
             <intent-filter>

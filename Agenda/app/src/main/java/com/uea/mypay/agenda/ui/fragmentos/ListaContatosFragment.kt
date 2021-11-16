@@ -1,11 +1,10 @@
-package com.uea.mypay.agenda.fragmentos
+package com.uea.mypay.agenda.ui.fragmentos
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uea.mypay.agenda.*
 import com.uea.mypay.agenda.databinding.FragmentListaContatosBinding
 import com.uea.mypay.agenda.enums.TipoOrdenacao
+import com.uea.mypay.agenda.ui.EditarContatoActivity
 import com.uea.mypay.agenda.utils.IntentsConstants
 import com.uea.mypay.agenda.utils.PrefsConstants
 /**

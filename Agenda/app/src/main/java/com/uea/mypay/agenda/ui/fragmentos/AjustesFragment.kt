@@ -1,4 +1,4 @@
-package com.uea.mypay.agenda.fragmentos
+package com.uea.mypay.agenda.ui.fragmentos
 
 import android.os.Bundle
 import android.view.LayoutInflater

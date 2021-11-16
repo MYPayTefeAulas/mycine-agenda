@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.uea.mypay.agenda.databinding.ItemContatoBinding
+import com.uea.mypay.agenda.model.Contato
+
 /**
  * Classe ContatosAdapter para exibir cada contato usando um RecyclerView
  *
