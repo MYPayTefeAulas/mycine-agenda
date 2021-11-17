@@ -22,4 +22,5 @@
     <string name="ordenacao_z_a">Ordenação Z -A</string>
     <string name="ordenacao_insercao">Ordenação Inserção</string>
     <string name="ordenacao_contatos">Ordenação dos Contatos</string>
+    <string name="adicionar_contatos_padrao">Adicionar os contatos padrões</string>
 </resources>

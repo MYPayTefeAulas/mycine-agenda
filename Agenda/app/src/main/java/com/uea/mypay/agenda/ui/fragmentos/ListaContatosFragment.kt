@@ -12,9 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.uea.mypay.agenda.*
 import com.uea.mypay.agenda.databinding.FragmentListaContatosBinding
 import com.uea.mypay.agenda.enums.TipoOrdenacao
+import com.uea.mypay.agenda.model.Contato
+import com.uea.mypay.agenda.repository.room.AppDatabase
 import com.uea.mypay.agenda.ui.EditarContatoActivity
 import com.uea.mypay.agenda.utils.IntentsConstants
 import com.uea.mypay.agenda.utils.PrefsConstants
+import com.uea.mypay.agenda.viewmodel.ListaContatosViewModel
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+
 /**
  * Classe ListaContatosFragment para listar todos os contatos da agenda
  *
@@ -29,6 +35,8 @@ class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
     private val binding get() = _binding!!
 
     private lateinit var adapter: ContatosAdapter
+
+    private lateinit var viewModel: ListaContatosViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,29 +56,35 @@ class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
             )
         )
 
-        carregaLista()
+        doAsync {
+            viewModel = ListaContatosViewModel(AppDatabase.getDatabase(requireContext()))
+            val listaContatos = viewModel.getAllContatos()
+            uiThread {
+                carregaLista(listaContatos)
+            }
+        }
 
         initTopBar()
 
         return binding.root
     }
 
-    private fun carregaLista() {
+    private fun carregaLista(listaContatos: List<Contato>) {
         val config = requireActivity().getSharedPreferences(PrefsConstants.FILE_CONFIGURACOES, 0)
         val tipoOrdenacao_str = config.getString(PrefsConstants.KEY_TIPO_ORDENACAO_CONTATOS, TipoOrdenacao.ORDEM_INSERCAO.toString())
        val tipoOrdenacao: TipoOrdenacao = TipoOrdenacao.valueOf(tipoOrdenacao_str!!)
 
         when (tipoOrdenacao) {
             TipoOrdenacao.ALFABETICA_AZ -> {
-                val listaOrdenada = Agenda.listaContatos.sortedBy { it.nome }
+                val listaOrdenada = listaContatos.sortedBy { it.nome }
                 adapter.swapData(listaOrdenada)
             }
             TipoOrdenacao.ALFABETICA_ZA -> {
-                val listaOrdenada = Agenda.listaContatos.sortedByDescending {it.nome }
+                val listaOrdenada = listaContatos.sortedByDescending {it.nome }
                 adapter.swapData(listaOrdenada)
             }
             TipoOrdenacao.ORDEM_INSERCAO -> {
-                adapter.swapData(Agenda.listaContatos)
+                adapter.swapData(listaContatos)
             }
         }
     }
@@ -95,20 +109,25 @@ class ListaContatosFragment: Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        val queryLowerCase = query.toString().lowercase()
-
-        val listaFiltrada = Agenda.listaContatos.filter { contatoAtual ->
-            contatoAtual.nome.lowercase().contains(queryLowerCase) ||
-                    contatoAtual.telefone.lowercase().contains(queryLowerCase)
-        }
-        adapter.swapData(listaFiltrada)
+//        val queryLowerCase = query.toString().lowercase()
+//
+//        val listaFiltrada = Agenda.listaContatos.filter { contatoAtual ->
+//            contatoAtual.nome.lowercase().contains(queryLowerCase) ||
+//                    contatoAtual.telefone.lowercase().contains(queryLowerCase)
+//        }
+//        adapter.swapData(listaFiltrada)
 
         return true
     }
 
     override fun onResume() {
         super.onResume()
-        carregaLista()
+        doAsync {
+            val listaContatos = viewModel.getAllContatos()
+            uiThread {
+                carregaLista(listaContatos)
+            }
+        }
     }
 
     override fun onDestroyView() {
